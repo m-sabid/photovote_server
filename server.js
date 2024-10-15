@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const marksRoutes = require("./routes/marks");
+const potmImageRoutes = require("./routes/potmImages");
 const User = require("./models/User");
 
 const app = express();
@@ -11,7 +12,6 @@ const app = express();
 mongoose
   .connect(
     "mongodb+srv://photoOfTheCentury:photoOfTheCenturySS24@cluster0.smucr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-    { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(async () => {
     console.log("MongoDB connected");
@@ -37,6 +37,8 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/marks", marksRoutes);
+app.use("/api/potmimages", potmImageRoutes);
+app.use("/api/auth", authRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
