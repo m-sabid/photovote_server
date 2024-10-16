@@ -103,7 +103,7 @@ const authMiddleware = (req, res, next) => {
 };
 
 
-router.put("/update/:id", authMiddleware, adminAuth, async (req, res) => {
+router.put("/update-user/:id", authMiddleware, adminAuth, async (req, res) => {
   const { id } = req.params;
   const { role, password } = req.body;
 
