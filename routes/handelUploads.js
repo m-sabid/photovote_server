@@ -99,18 +99,26 @@ router.post("/gallery/upload", async (req, res) => {
   });
   
 
-// READ: Get all Gallery Images
+// READ: Get 18 Random Gallery Images
 router.get("/gallery/images", async (req, res) => {
   try {
+    // Retrieve all images from the database
     const images = await GalleryImage.find();
-    res
-      .status(200)
-      .json({ message: "Gallery images retrieved successfully", images });
+
+    // Shuffle the images array and select 18
+    const shuffledImages = images.sort(() => 0.5 - Math.random()).slice(0, 18);
+
+    // Send only 18 randomly selected images
+    res.status(200).json({
+      message: "18 random gallery images retrieved successfully",
+      images: shuffledImages
+    });
   } catch (error) {
-    console.error("Error retrieving Gallery images:", error);
-    res.status(500).json({ message: "Error retrieving Gallery images", error });
+    console.error("Error retrieving gallery images:", error);
+    res.status(500).json({ message: "Error retrieving gallery images", error });
   }
 });
+
 
 // DELETE: Delete Gallery Image
 router.delete("/gallery/images/:id", async (req, res) => {
